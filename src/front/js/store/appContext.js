@@ -18,7 +18,9 @@ const injectContext = (PassedComponent) => {
     );
 
     useEffect(() => {
-      state.actions.checkLocalStorage();
+      state.actions.getUser();
+      state.actions.getCharacteres();
+      state.actions.getPlanets();
     }, []);
 
     return (

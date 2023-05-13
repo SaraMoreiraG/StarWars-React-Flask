@@ -9,7 +9,9 @@ import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { PlanetDescription } from "./pages/planetDescription";
 import { CharDescription } from "./pages/charDescription.js";
-import { VehicleDescription } from "./pages/vehicleDescription";
+import { Signup } from "./pages/signup";
+import { Login } from "./pages/login";
+import { Private } from "./pages/private";
 
 const Layout = () => {
   const basename = process.env.BASENAME || "";
@@ -21,20 +23,15 @@ const Layout = () => {
           <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/private" element={<Private />} />
             <Route
-              path="/chardescription/:name/:id"
+              path="/chardescription/:name/:uid"
               element={<CharDescription />}
             />
             <Route
-              path="/vehicledescription/:name/:id"
-              element={<VehicleDescription />}
-            />
-            <Route
-              path="/planetdescription/:name/:id"
-              element={<PlanetDescription />}
-            />
-            <Route
-              path="/planetdescription/:name/:id"
+              path="/planetdescription/:name/:uid"
               element={<PlanetDescription />}
             />
           </Routes>

@@ -6,23 +6,28 @@ import { Context } from "../store/appContext";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 
-function Characteres({ personInfo }) {
+function Planets({ planet }) {
   const { store, actions } = useContext(Context);
   const [fav, setFav] = useState(null);
   const [favId, setFavId] = useState(null);
 
-  const imgSrc =
-    "https://starwars-visualguide.com/assets/img/characters/" +
-    personInfo.uid +
+  let imgSrc =
+    "https://starwars-visualguide.com/assets/img/planets/" +
+    planet.uid +
     ".jpg";
+
+  if (planet.uid == 1)
+    imgSrc =
+      "https://img1.starwars-holonet.com/holonet/dictionnaire/photos/planete_tatooine.jpg";
 
   useEffect(() => {
     (async () => {
       const favorites = await store.user;
-
+      console.log(planet.name);
       if (favorites && store.user.favorites) {
         store.user.favorites.forEach((item) => {
-          if (item.name == personInfo.name) {
+          console.log(item.name);
+          if (item.name == planet.name) {
             setFav(true);
             setFavId(item.id);
           }
@@ -31,38 +36,21 @@ function Characteres({ personInfo }) {
     })();
   });
 
-  async function deleteFavorite(id) {
-    console.log("Deleting");
-    console.log(id);
-    setFav(false);
-    // const response = await fetch(
-    //   process.env.BACKEND_URL + "/favorite/people/" + id,
-    //   {
-    //     method: "DELETE",
-    //     headers: { "Content-Type": "application/json" },
-    //   }
-    // );
-    // if (response.ok) setFav(true);
-  }
-
   return (
     <>
       <Card className="p-0 border border-0" style={{ width: "16rem" }}>
         <Card.Img variant="top" src={imgSrc} />
-        {personInfo && (
+        {planet && (
           <Card.Body>
-            <Card.Title>{personInfo.name}</Card.Title>
-            <div key={personInfo.uid}>
+            <Card.Title>{planet.name}</Card.Title>
+            <div key={planet.id}>
               <ul>
-                <li>Gender: {personInfo.gender}</li>
-                <li>Hair Color: {personInfo.hair_color}</li>
-                <li>Eye Color: {personInfo.eye_color}</li>
+                <li>Population: {planet.population}</li>
+                <li>Climate: {planet.climate}</li>
               </ul>
               <div className="d-flex justify-content-between">
                 <Link
-                  to={
-                    "/chardescription/" + personInfo.name + "/" + personInfo.uid
-                  }
+                  to={"/planetdescription/" + planet.name + "/" + planet.uid}
                 >
                   <Button variant="outline-primary" className="mt-2">
                     See more!
@@ -73,12 +61,8 @@ function Characteres({ personInfo }) {
                   className="mt-2"
                   onClick={
                     fav
-                      ? () => {
-                          setFav(false);
-                          actions.deleteFavorite(favId);
-                          console.log(fav);
-                        }
-                      : () => actions.addFavorite(personInfo, "character")
+                      ? () => actions.deleteFavorite(favId)
+                      : () => actions.addFavorite(planet, "planet")
                   }
                 >
                   {fav && <i className="fa-solid fa-heart"></i>}
@@ -93,4 +77,4 @@ function Characteres({ personInfo }) {
   );
 }
 
-export default Characteres;
+export default Planets;

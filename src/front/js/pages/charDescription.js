@@ -1,20 +1,34 @@
 import React, { useState, useEffect, useContext } from "react";
-import PropTypes from "prop-types";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+
 import { Context } from "../store/appContext";
+
 import { Button } from "react-bootstrap";
 
-export const CharDescription = (props) => {
+export const CharDescription = () => {
   const { store, actions } = useContext(Context);
   const params = useParams();
-  const character = JSON.parse(localStorage.getItem("Character" + params.id));
-  let fav = false;
 
-  if (character) {
-    for (let i = 0; i < store.favorites.length; i++) {
-      if (store.favorites[i] == character.name) fav = true;
-    }
+  const [character, setCharacter] = useState({});
+  const [fav, setFav] = useState(false);
+
+  async function getCharacter() {
+    const response = await fetch(
+      process.env.BACKEND_URL + "/api/person/" + params.uid
+    );
+    const data = await response.json();
+    setCharacter(data.data);
   }
+
+  useEffect(() => {
+    getCharacter();
+    if (store.user) {
+      console.log("Hay fav");
+      for (let i = 0; i < store.user.favorites.length; i++) {
+        if (store.user.favorites[i].people_id == character.id) setFav(true);
+      }
+    }
+  }, []);
 
   return (
     <div>
@@ -23,7 +37,7 @@ export const CharDescription = (props) => {
           <img
             src={
               "https://starwars-visualguide.com/assets/img/characters/" +
-              params.id +
+              params.uid +
               ".jpg"
             }
           />
@@ -38,24 +52,18 @@ export const CharDescription = (props) => {
             aspernatur aut odit aut fugit, sed quia consequuntur magni dolores
             eos qui ratione voluptatem sequi
           </p>
-          {fav && (
-            <Button
-              variant="outline-warning"
-              className="mt-2"
-              onClick={() => actions.saveFavorite(character.name)}
-            >
-              <i className="fa-solid fa-heart"></i>
-            </Button>
-          )}
-          {!fav && (
-            <Button
-              variant="outline-warning"
-              className="mt-2"
-              onClick={() => actions.saveFavorite(character.name)}
-            >
-              <i className="fa-regular fa-heart"></i>
-            </Button>
-          )}
+          <Button
+            variant="outline-warning"
+            className="mt-2"
+            onClick={
+              fav
+                ? () => actions.deleteFavorite()
+                : () => actions.saveFavorite()
+            }
+          >
+            {fav && <i className="fa-solid fa-heart"></i>}
+            {!fav && <i className="fa-regular fa-heart"></i>}
+          </Button>
         </div>
       </div>
       <div className="row d-flex p-3 justify-content-center">
