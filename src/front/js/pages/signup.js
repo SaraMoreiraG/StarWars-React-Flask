@@ -72,7 +72,7 @@ export const Signup = () => {
   }
 
   return (
-    <div className="container mt-2">
+    <div className="container">
       <div className="row d-flex justify-content-center align-items-center">
         <div className="col-md-6">
           <div className="card bg-dark text-white">

@@ -18,9 +18,9 @@ The frontend of the Star Wars Web App is built using React. It provides a user i
 
 ![Frontend Screenshot](/images/frontend-screenshot.png)
 
-![Character Card](/images/character-card.png)
+![Card Details](/images/card-details.png)
 
-![Planet Card](/images/planet-card.png)
+![Register](/images/register.png)
 
 ## Backend
 
