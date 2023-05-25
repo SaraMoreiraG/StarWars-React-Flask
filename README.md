@@ -1,6 +1,18 @@
 # Star Wars Web App
 
 Welcome to the Star Wars Web App! This project is a React web application that interacts with a RESTful API built with Python Flask and SQLAlchemy. The app allows users to browse and search for information about Star Wars characters, vehicles, and planets. Users can also save their favorite items and view them later.
+![React logo](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/320px-React-icon.svg.png)
+![React logo] (https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/320px-Python-logo-notext.svg.png)
+
+<p align="center">
+Used technologies:
+<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Bootstrap_logo.svg/1280px-Bootstrap_logo.svg.png' alt='bootstrap' alt='bootstrap' width='40'>
+<img src='https://cdn.worldvectorlogo.com/logos/html-1.svg' alt='html' width='30'>
+<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2300px-React-icon.svg.png' alt='react' alt='react' width='40'>
+<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/2048px-Unofficial_JavaScript_logo_2.svg.png'
+alt='javascript' alt='javascript' width='35'>
+<img src='https://reactrouter.com/_brand/react-router-stacked-color-inverted.png' alt='react router' width='50'>
+</p>
 
 ## Features
 
