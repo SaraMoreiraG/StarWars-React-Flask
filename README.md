@@ -7,7 +7,7 @@ Welcome to the Star Wars Web App! This project is a React web application that i
 <img src='https://media.licdn.com/dms/image/C5112AQF49DOfOhCFSA/article-cover_image-shrink_720_1280/0/1579816811751?e=2147483647&v=beta&t=e47GGJDzoqsm4dl3qV2EjVWrxyMzIwsPmEE9Gywo83w' alt='api' width='30'>
 <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/320px-Python-logo-notext.svg.png' alt='python' width='40'>
 <img src='https://media.licdn.com/dms/image/D4D12AQGeW4zAzND7CA/article-cover_image-shrink_600_2000/0/1662469843352?e=2147483647&v=beta&t=E1OjGtY7Nl5xL1DTOz7n2aq9fVKp75epQqppgPcpviI'
-alt='flask and SQLAlchemy' width='80'>
+alt='flask and SQLAlchemy' width='120'>
 </p>
 
 ## Features
