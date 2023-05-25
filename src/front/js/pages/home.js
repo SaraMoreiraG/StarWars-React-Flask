@@ -12,21 +12,31 @@ function Home() {
 
   return (
     <div className="body text-white bg-dark mb-5">
-      <div className="container">
-        <h2>Characters</h2>
-        <ul className="cards">
-          {store.characteres &&
-            store.characteres.map((person) => (
-              <Characteres key={person.uid} personInfo={person} />
-            ))}
-        </ul>
-        <h2>Planets</h2>
-        <ul className="cards pb-5">
-          {store.planets &&
-            store.planets.map((planet) => (
-              <Planets key={planet.id} planet={planet} />
-            ))}
-        </ul>
+      <div className="row pt-2 justify-content-center">
+        <div className="text-center">
+          <h2>Characters</h2>
+        </div>
+        <div className="container">
+          <ul className="cards">
+            {store.characteres &&
+              store.characteres.map((person) => (
+                <Characteres key={person.uid} personInfo={person} />
+              ))}
+          </ul>
+        </div>
+      </div>
+      <div className="row pt-5 justify-content-center">
+        <div className="text-center">
+          <h2>Planets</h2>
+        </div>
+        <div className="container">
+          <ul className="cards pb-5">
+            {store.planets &&
+              store.planets.map((planet) => (
+                <Planets key={planet.id} planet={planet} />
+              ))}
+          </ul>
+        </div>
       </div>
     </div>
   );

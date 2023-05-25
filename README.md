@@ -1,71 +1,70 @@
-# WebApp boilerplate with React JS and Flask API
+# Star Wars Web App
 
-Build web applications using React.js for the front end and python/flask for your backend API.
+Welcome to the Star Wars Web App! This project is a React web application that interacts with a RESTful API built with Python Flask and SQLAlchemy. The app allows users to browse and search for information about Star Wars characters, vehicles, and planets. Users can also save their favorite items and view them later.
 
-- Documentation can be found here: https://start.4geeksacademy.com/starters/react-flask
-- Here is a video on [how to use this template](https://www.loom.com/share/f37c6838b3f1496c95111e515e83dd9b)
-- Integrated with Pipenv for package managing.
-- Fast deployment to heroku [in just a few steps here](https://start.4geeksacademy.com/backend/deploy-heroku-posgres).
-- Use of .env file.
-- SQLAlchemy integration for database abstraction.
+## Features
 
-### 1) Installation:
+- React web app with a user-friendly interface
+- Browse and search for Star Wars characters, vehicles, and planets
+- Detailed information view for each entity
+- Favorite/Read Later functionality to save items
+- Autocomplete search bar for Characters and Planets
+- RESTful API built with Python Flask and SQLAlchemy
+- Authentication system with JWT Token
 
-> If you use Github Codespaces (recommended) or Gitpod this template will already come with Python, Node and the Posgres Database installed. If you are working locally make sure to install Python 3.10, Node 
+## Frontend
 
-It is recomended to install the backend first, make sure you have Python 3.8, Pipenv and a database engine (Posgress recomended)
+The frontend of the Star Wars Web App is built using React. It provides a user interface to interact with the SWAPI (Star Wars API) and display information about people, vehicles, and planets. The frontend features Bootstrap components, such as cards and modals, to present the entity details in an organized manner.
 
-1. Install the python packages: `$ pipenv install`
-2. Create a .env file based on the .env.example: `$ cp .env.example .env`
-3. Install your database engine and create your database, depending on your database you have to create a DATABASE_URL variable with one of the possible values, make sure you replace the valudes with your database information:
+![Frontend Screenshot](/images/frontend-screenshot.png)
 
-| Engine    | DATABASE_URL                                        |
-| --------- | --------------------------------------------------- |
-| SQLite    | sqlite:////test.db                                  |
-| MySQL     | mysql://username:password@localhost:port/example    |
-| Postgress | postgres://username:password@localhost:5432/example |
+![Character Card](/images/character-card.png)
 
-4. Migrate the migrations: `$ pipenv run migrate` (skip if you have not made changes to the models on the `./src/api/models.py`)
-5. Run the migrations: `$ pipenv run upgrade`
-6. Run the application: `$ pipenv run start`
+![Planet Card](/images/planet-card.png)
 
-> Note: Codespaces users can connect to psql by typing: `psql -h localhost -U gitpod example`
+## Backend
 
-### Backend Populate Table Users
+The backend of the Star Wars Web App is a RESTful API built with Python Flask. It uses SQLAlchemy as the ORM (Object-Relational Mapping) library to connect to a database and retrieve entity information. The API implements various endpoints to fetch data for people, planets, and user-related operations.
 
-To insert test users in the database execute the following command:
+### Endpoints
 
-```sh
-$ flask insert-test-users 5
-```
+- `[GET] /people`: Get a list of all the people in the database
+- `[GET] /people/<int:people_id>`: Get information about a single person
+- `[POST] /people`: Add a new person to the database
+- `[PUT] /people/<int:people_id>`: Update the information of a person in the database
+- `[DELETE] /people/<int:people_id>`: Delete a person from the database based on their ID
 
-And you will see the following message:
+- `[GET] /planets`: Get a list of all the planets in the database
+- `[GET] /planets/<int:planet_id>`: Get information about a single planet
+- `[POST] /planet`: Add a new planet to the database
+- `[PUT] /planet/<int:planet_id>`: Update the information of a planet in the database
+- `[DELETE] /planet/<int:planet_id>`: Delete a planet from the database based on their ID
 
-```
-  Creating test users
-  test_user1@test.com created.
-  test_user2@test.com created.
-  test_user3@test.com created.
-  test_user4@test.com created.
-  test_user5@test.com created.
-  Users created successfully!
-```
+- `[GET] /user`: Get a list of all the blog post users
+- `[POST] /register`: Register a new user
+- `[POST] /login`: Log in with user credentials
 
-To update with all yours tables you can edit the file app.py and go to the line 80 to insert the code to populate others tables
+- `[POST] /favorite`: Add a new item as a favorite for the current user
+- `[DELETE] /favorite/<int:id>`: Remove a favorite item from the current user's list based on its ID
 
-### Front-End Manual Installation:
+## Getting Started
 
--   Make sure you are using node version 14+ and that you have already successfully installed and runned the backend.
+To set up the Star Wars Web App locally, follow these steps:
 
-1. Install the packages: `$ npm install`
-2. Start coding! start the webpack dev server `$ npm run start`
+1. Clone the repository: `git clone https://github.com/yourusername/star-wars-web-app.git`
+2. Navigate to the project directory: `cd star-wars-web-app`
+3. Install the frontend dependencies: `npm install`
+4. Start the frontend development server: `npm start`
+5. In a separate terminal, navigate to the backend directory: `cd backend`
+6. Install the backend dependencies: `pip install -r requirements.txt`
+7. Run the Flask development server: `python app.py`
+8. Access the web app in your browser at: `http://localhost:3000`
 
-## Publish your website!
+## Contributing
 
-This boilerplate it's 100% read to deploy with Render.com and Heroku in a matter of minutes. Please read the [official documentation about it](https://start.4geeksacademy.com/deploy).
+Contributions are welcome! If you'd like to contribute to the Star Wars Web App, please follow these steps:
 
-### Contributors
-
-This template was built as part of the 4Geeks Academy [Coding Bootcamp](https://4geeksacademy.com/us/coding-bootcamp) by [Alejandro Sanchez](https://twitter.com/alesanchezr) and many other contributors. Find out more about our [Full Stack Developer Course](https://4geeksacademy.com/us/coding-bootcamps/part-time-full-stack-developer), and [Data Science Bootcamp](https://4geeksacademy.com/us/coding-bootcamps/datascience-machine-learning).
-
-You can find other templates and resources like this at the [school github page](https://github.com/4geeksacademy/).
+1. Fork the repository
+2. Create a new branch: `git checkout -b feature/my-feature`
+3. Make your changes and commit them: `git commit -am 'Add your commit message'`
+4. Push your changes
