@@ -5,13 +5,13 @@ Welcome to the Star Wars Web App! This project is a React web application that i
 ![React logo] (https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/320px-Python-logo-notext.svg.png)
 
 <p align="center">
-Used technologies:
-<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Bootstrap_logo.svg/1280px-Bootstrap_logo.svg.png' alt='bootstrap' alt='bootstrap' width='40'>
-<img src='https://cdn.worldvectorlogo.com/logos/html-1.svg' alt='html' width='30'>
-<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2300px-React-icon.svg.png' alt='react' alt='react' width='40'>
-<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/2048px-Unofficial_JavaScript_logo_2.svg.png'
-alt='javascript' alt='javascript' width='35'>
-<img src='https://reactrouter.com/_brand/react-router-stacked-color-inverted.png' alt='react router' width='50'>
+<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2300px-React-icon.svg.png' alt='react' width='40'>
+<img src='https://media.licdn.com/dms/image/C5112AQF49DOfOhCFSA/article-cover_image-shrink_720_1280/0/1579816811751?e=2147483647&v=beta&t=e47GGJDzoqsm4dl3qV2EjVWrxyMzIwsPmEE9Gywo83w' alt='api' width='30'>
+<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/320px-Python-logo-notext.svg.png' alt='python' width='40'>
+<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Flask_logo.svg/320px-Flask_logo.svg.png'
+alt='javascript' width='35'>
+<img src='https://hakin9.org/wp-content/uploads/2019/08/connect-a-flask-app-to-a-mysql-database-with-sqlalchemy-and-pymysql.jpg' alt='SQLAlchemy' width='50'>
+
 </p>
 
 ## Features
