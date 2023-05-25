@@ -1,33 +1,50 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router";
 import { Button } from "react-bootstrap";
+import { Context } from "../store/appContext";
 
 export const Login = () => {
+  const { actions } = useContext(Context);
   const navigate = useNavigate();
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
+  const [loginError, setLoginError] = useState("");
 
   async function loginUser() {
-    const response = await fetch(process.env.BACKEND_URL + "/api/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(user),
-    });
-    if (response.ok) {
-      const data = await response.json();
-      const token = data.token;
-      sessionStorage.setItem("token", token);
-      // await actions.getCurrentUser();
-      navigate("/private");
+    try {
+      const response = await fetch(process.env.BACKEND_URL + "/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(user),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        const token = data.token;
+        sessionStorage.setItem("token", token);
+
+        // Call getUser and wait for it to complete
+        await actions.getUser();
+
+        navigate("/private");
+      } else if (response.status === 403) {
+        setLoginError("Invalid email or password");
+      } else {
+        const errorData = await response.json();
+        setLoginError(errorData.message);
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+      setLoginError("Login failed. Please try again.");
     }
   }
 
   return (
     <div className="container mt-2">
       <div className="row d-flex justify-content-center align-items-center">
-        <div className="col-md-12">
+        <div className="col-md-6">
           <div className="card bg-dark text-white">
             <div className="card-body p-3 text-center">
               <div className="mb-md-5 mt-md-4 pb-5">
@@ -56,12 +73,14 @@ export const Login = () => {
                   />
                 </div>
 
+                {loginError && <div className="text-danger">{loginError}</div>}
+
                 <Button
                   variant="outline-warning"
                   className="mt-2"
                   onClick={() => loginUser()}
                 >
-                  Register
+                  LogIn
                 </Button>
               </div>
             </div>

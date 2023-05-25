@@ -8,33 +8,28 @@ import Button from "react-bootstrap/Button";
 
 function Planets({ planet }) {
   const { store, actions } = useContext(Context);
-  const [fav, setFav] = useState(null);
-  const [favId, setFavId] = useState(null);
+  const [fav, setFav] = useState({
+    isFav: false,
+    favId: null,
+  });
+
+  useEffect(() => {
+    if (store.user) {
+      const favorites = store.user.favorites || [];
+      setFav((prevFav) => ({
+        ...prevFav,
+        isFav: favorites.some((favorite) => favorite.name === planet.name),
+        favId:
+          favorites.find((favorite) => favorite.name === planet.name)?.id ||
+          null,
+      }));
+    }
+  }, [store.user, planet.name]);
 
   let imgSrc =
     "https://starwars-visualguide.com/assets/img/planets/" +
     planet.uid +
     ".jpg";
-
-  if (planet.uid == 1)
-    imgSrc =
-      "https://img1.starwars-holonet.com/holonet/dictionnaire/photos/planete_tatooine.jpg";
-
-  useEffect(() => {
-    (async () => {
-      const favorites = await store.user;
-      console.log(planet.name);
-      if (favorites && store.user.favorites) {
-        store.user.favorites.forEach((item) => {
-          console.log(item.name);
-          if (item.name == planet.name) {
-            setFav(true);
-            setFavId(item.id);
-          }
-        });
-      }
-    })();
-  });
 
   return (
     <>
@@ -56,18 +51,32 @@ function Planets({ planet }) {
                     See more!
                   </Button>
                 </Link>
-                <Button
-                  variant="outline-warning"
-                  className="mt-2"
-                  onClick={
-                    fav
-                      ? () => actions.deleteFavorite(favId)
-                      : () => actions.addFavorite(planet, "planet")
-                  }
-                >
-                  {fav && <i className="fa-solid fa-heart"></i>}
-                  {!fav && <i className="fa-regular fa-heart"></i>}
-                </Button>
+                {store.user && (
+                  <Button
+                    variant="outline-warning"
+                    className="mt-2"
+                    onClick={
+                      fav.isFav
+                        ? () => {
+                            actions.deleteFavorite(fav.favId);
+                            setFav({
+                              isFav: false,
+                              favId: null,
+                            });
+                          }
+                        : () => {
+                            actions.addFavorite(planet, "planet");
+                            setFav({
+                              isFav: true,
+                              favId: null,
+                            });
+                          }
+                    }
+                  >
+                    {fav.isFav && <i className="fa-solid fa-heart"></i>}
+                    {!fav.isFav && <i className="fa-regular fa-heart"></i>}
+                  </Button>
+                )}
               </div>
             </div>
           </Card.Body>

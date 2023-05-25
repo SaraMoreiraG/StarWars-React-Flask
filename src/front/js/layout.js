@@ -23,9 +23,9 @@ const Layout = () => {
           <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/private" element={<Private />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/private" element={<Private />} />
             <Route
               path="/chardescription/:name/:uid"
               element={<CharDescription />}

@@ -92,6 +92,11 @@ const getState = ({ getStore, getActions, setStore }) => {
           await getActions().getUser();
         }
       },
+
+      resetUser() {
+        setStore({ user: null });
+        sessionStorage.removeItem("token");
+      },
     },
   };
 };

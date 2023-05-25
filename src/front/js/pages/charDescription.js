@@ -23,7 +23,6 @@ export const CharDescription = () => {
   useEffect(() => {
     getCharacter();
     if (store.user) {
-      console.log("Hay fav");
       for (let i = 0; i < store.user.favorites.length; i++) {
         if (store.user.favorites[i].people_id == character.id) setFav(true);
       }

@@ -19,7 +19,10 @@ def get_all_people():
 @api.route('/person/<int:people_uid>', methods=['GET'])
 def get_person_by_id(people_uid):
     person = People.query.filter_by(uid=people_uid).first()
-    return jsonify({"data": person.serialize()}), 200
+    if person:
+        return jsonify({"data": person.serialize()}), 200
+    else:
+        return jsonify({"error": "Person not found"}), 404
 
 @api.route('/people', methods=['POST'])
 def add_people():
@@ -40,6 +43,38 @@ def add_people():
     db.session.add(person)
     db.session.commit()
     return jsonify({"response": "Person added"}), 200
+
+@api.route('/person/<int:people_uid>', methods=['DELETE'])
+def delete_person_by_id(people_uid):
+    person = People.query.filter_by(uid=people_uid).first()
+    if person:
+        db.session.delete(person)
+        db.session.commit()
+        return jsonify({"response": "Person deleted"}), 200
+    else:
+        return jsonify({"error": "Person not found"}), 404
+
+@api.route('/person/<int:people_uid>', methods=['PUT'])
+def update_person_by_id(people_uid):
+    person = People.query.filter_by(uid=people_uid).first()
+    if person:
+        body = request.json
+        person.uid = body.get('uid', person.uid)
+        person.name = body.get('name', person.name)
+        person.url = body.get('url', person.url)
+        person.height = body.get('height', person.height)
+        person.mass = body.get('mass', person.mass)
+        person.hair_color = body.get('hair_color', person.hair_color)
+        person.skin_color = body.get('skin_color', person.skin_color)
+        person.eye_color = body.get('eye_color', person.eye_color)
+        person.birth_year = body.get('birth_year', person.birth_year)
+        person.gender = body.get('gender', person.gender)
+        person.description = body.get('description', person.description)
+        db.session.commit()
+        return jsonify({"response": "Person updated"}), 200
+    else:
+        return jsonify({"error": "Person not found"}), 404
+
 
 # --------------  PLANETS
 
@@ -72,6 +107,41 @@ def add_planet():
     db.session.add(planet)
     db.session.commit()
     return jsonify({"response": "Planet added"}), 200
+
+@api.route('/planet/<int:planet_uid>', methods=['DELETE'])
+def delete_planet_by_id(planet_uid):
+    planet = Planets.query.filter_by(uid=planet_uid).first()
+    if planet:
+        db.session.delete(planet)
+        db.session.commit()
+        return jsonify({"response": "Planet deleted"}), 200
+    else:
+        return jsonify({"error": "Planet not found"}), 404
+
+@api.route('/planet/<int:planet_uid>', methods=['PUT'])
+def update_planet(planet_uid):
+    body = request.json
+    planet = Planets.query.filter_by(uid=planet_uid).first()
+
+    if planet:
+        planet.uid = body["uid"]
+        planet.name = body["name"]
+        planet.url = body["url"]
+        planet.diameter = body["diameter"]
+        planet.rotation_period = body["rotation_period"]
+        planet.orbital_period = body["orbital_period"]
+        planet.gravity = body["gravity"]
+        planet.population = body["population"]
+        planet.climate = body["climate"]
+        planet.terrain = body["terrain"]
+        planet.surface_water = body["surface_water"]
+
+        db.session.commit()
+
+        return jsonify({"response": "Planet updated"}), 200
+    else:
+        return jsonify({"error": "Planet not found"}), 404
+
 
 # --------------  USER
 
@@ -140,7 +210,6 @@ def add_favorite_people():
 
 @api.route('/favorite/<int:id>', methods=['DELETE'])
 def delete_favorite_people(id):
-    print('@@@@@@')
     user_id_check = 1
     favorite = Favorites.query.get(id)
     if favorite.user_id == user_id_check:
@@ -149,27 +218,3 @@ def delete_favorite_people(id):
         return jsonify({"response": "Favorite deleted"}), 200
     else:
         return jsonify({"response": "You don't have permission"}), 400
-
-# @api.route('/favorite/planet/<int:planet_uid>', methods=['POST'])
-# def add_favorite_planet(planet_uid):
-#     user_id_check = 1
-#     favorite = Favorites(
-#         user_id = user_id_check,
-#         planet_id = planet_uid,
-#     )
-#     db.session.add(favorite);
-#     db.session.commit();
-#     return jsonify({"response": "Favorite added"}), 200
-
-# @api.route('/favorite/planet/<int:planet_id>', methods=['DELETE'])
-# def delete_favorite_planet(planet_id):
-#     user_id_check = 1
-#     favorite = Favorites.query.get(planet_id)
-#     if favorite.user_id == user_id_check:
-#         db.session.delete(favorite);
-#         db.session.commit();
-#         return jsonify({"response": "Favorite deleted"}), 200
-#     else:
-#         return jsonify({"response": "You don't have permission"}), 400
-
-# -------------------

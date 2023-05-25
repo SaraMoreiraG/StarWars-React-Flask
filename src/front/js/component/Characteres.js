@@ -8,42 +8,28 @@ import Button from "react-bootstrap/Button";
 
 function Characteres({ personInfo }) {
   const { store, actions } = useContext(Context);
-  const [fav, setFav] = useState(null);
-  const [favId, setFavId] = useState(null);
+  const [fav, setFav] = useState({
+    isFav: false,
+    favId: null,
+  });
+
+  useEffect(() => {
+    if (store.user) {
+      const favorites = store.user.favorites || [];
+      setFav((prevFav) => ({
+        ...prevFav,
+        isFav: favorites.some((favorite) => favorite.name === personInfo.name),
+        favId:
+          favorites.find((favorite) => favorite.name === personInfo.name)?.id ||
+          null,
+      }));
+    }
+  }, [store.user, personInfo.name]);
 
   const imgSrc =
     "https://starwars-visualguide.com/assets/img/characters/" +
     personInfo.uid +
     ".jpg";
-
-  useEffect(() => {
-    (async () => {
-      const favorites = await store.user;
-
-      if (favorites && store.user.favorites) {
-        store.user.favorites.forEach((item) => {
-          if (item.name == personInfo.name) {
-            setFav(true);
-            setFavId(item.id);
-          }
-        });
-      }
-    })();
-  });
-
-  async function deleteFavorite(id) {
-    console.log("Deleting");
-    console.log(id);
-    setFav(false);
-    // const response = await fetch(
-    //   process.env.BACKEND_URL + "/favorite/people/" + id,
-    //   {
-    //     method: "DELETE",
-    //     headers: { "Content-Type": "application/json" },
-    //   }
-    // );
-    // if (response.ok) setFav(true);
-  }
 
   return (
     <>
@@ -68,22 +54,32 @@ function Characteres({ personInfo }) {
                     See more!
                   </Button>
                 </Link>
-                <Button
-                  variant="outline-warning"
-                  className="mt-2"
-                  onClick={
-                    fav
-                      ? () => {
-                          setFav(false);
-                          actions.deleteFavorite(favId);
-                          console.log(fav);
-                        }
-                      : () => actions.addFavorite(personInfo, "character")
-                  }
-                >
-                  {fav && <i className="fa-solid fa-heart"></i>}
-                  {!fav && <i className="fa-regular fa-heart"></i>}
-                </Button>
+                {store.user && (
+                  <Button
+                    variant="outline-warning"
+                    className="mt-2"
+                    onClick={
+                      fav.isFav
+                        ? () => {
+                            actions.deleteFavorite(fav.favId);
+                            setFav((prevState) => ({
+                              ...prevState,
+                              isFav: false,
+                            }));
+                          }
+                        : () => {
+                            actions.addFavorite(personInfo, "character");
+                            setFav((prevState) => ({
+                              ...prevState,
+                              isFav: true,
+                            }));
+                          }
+                    }
+                  >
+                    {fav.isFav && <i className="fa-solid fa-heart"></i>}
+                    {!fav.isFav && <i className="fa-regular fa-heart"></i>}
+                  </Button>
+                )}
               </div>
             </div>
           </Card.Body>
