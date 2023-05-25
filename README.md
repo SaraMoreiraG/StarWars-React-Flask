@@ -1,15 +1,13 @@
 # Star Wars Web App
 
 Welcome to the Star Wars Web App! This project is a React web application that interacts with a RESTful API built with Python Flask and SQLAlchemy. The app allows users to browse and search for information about Star Wars characters, vehicles, and planets. Users can also save their favorite items and view them later.
-![React logo](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/320px-React-icon.svg.png)
-![React logo] (https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/320px-Python-logo-notext.svg.png)
 
 <p align="center">
 <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2300px-React-icon.svg.png' alt='react' width='40'>
 <img src='https://media.licdn.com/dms/image/C5112AQF49DOfOhCFSA/article-cover_image-shrink_720_1280/0/1579816811751?e=2147483647&v=beta&t=e47GGJDzoqsm4dl3qV2EjVWrxyMzIwsPmEE9Gywo83w' alt='api' width='30'>
 <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/320px-Python-logo-notext.svg.png' alt='python' width='40'>
-<img src='https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Flask_logo.svg/320px-Flask_logo.svg.png'
-alt='javascript' width='35'>
+<img src='https://media.licdn.com/dms/image/D4D12AQGeW4zAzND7CA/article-cover_image-shrink_600_2000/0/1662469843352?e=2147483647&v=beta&t=E1OjGtY7Nl5xL1DTOz7n2aq9fVKp75epQqppgPcpviI'
+alt='flask and SQLAlchemy' width='35'>
 <img src='https://hakin9.org/wp-content/uploads/2019/08/connect-a-flask-app-to-a-mysql-database-with-sqlalchemy-and-pymysql.jpg' alt='SQLAlchemy' width='50'>
 
 </p>
