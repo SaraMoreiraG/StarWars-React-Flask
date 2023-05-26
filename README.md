@@ -61,7 +61,7 @@ The backend of the Star Wars Web App is a RESTful API built with Python Flask. I
 
 To set up the Star Wars Web App locally, follow these steps:
 
-1. Clone the repository: `git clone https://github.com/yourusername/star-wars-web-app.git`
+1. Clone the repository: `git clone https://github.com/SaraMoreiraG/StarWars-React-Flask.git`
 2. Navigate to the project directory: `cd star-wars-web-app`
 3. Install the frontend dependencies: `npm install`
 4. Start the frontend development server: `npm start`
